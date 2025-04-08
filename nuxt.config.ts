@@ -27,25 +27,20 @@ export default defineNuxtConfig({
   },
   
   i18n: {
-    lazy: true,
-    langDir: 'i18n',
     strategy: 'prefix_except_default',
     defaultLocale: 'en',
     locales: [
       {
         code: 'en',
-        name: 'English',
-        file: 'en.json'
+        name: 'English'
       },
       {
         code: 'zh-TW',
-        name: '繁體中文',
-        file: 'zh-TW.json'
+        name: '繁體中文'
       },
       {
         code: 'ko',
-        name: '한국어',
-        file: 'ko.json'
+        name: '한국어'
       }
     ],
     detectBrowserLanguage: {
