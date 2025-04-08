@@ -1,0 +1,154 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String           @id @default(uuid())
+  username      String           @unique
+  email         String           @unique
+  passwordHash  String           @map("password_hash")
+  fullName      String?          @map("full_name")
+  googleId      String?          @map("google_id")
+  createdAt     DateTime         @default(now()) @map("created_at")
+  lastLogin     DateTime?        @map("last_login")
+  isActive      Boolean          @default(true) @map("is_active")
+  preferences   UserPreference?
+  progress      UserProgress[]
+  wordHistory   UserWordHistory[]
+
+  @@map("users")
+}
+
+model UserPreference {
+  userId            String   @id @map("user_id")
+  difficultyLevel   String?  @default("beginner") @map("difficulty_level")
+  preferredCategories String[] @map("preferred_categories")
+  speechRate        Float?   @default(1.0) @map("speech_rate")
+  darkMode          Boolean? @default(false) @map("dark_mode")
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @default(now()) @map("updated_at")
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_preferences")
+}
+
+model Article {
+  id          String          @id @default(uuid())
+  title       String
+  excerpt     String
+  content     String
+  paragraphs  String[]
+  category    String
+  level       String
+  image       String
+  date        DateTime
+  createdAt   DateTime        @default(now()) @map("created_at")
+  updatedAt   DateTime        @default(now()) @map("updated_at")
+  authors     ArticleAuthor[]
+  userProgress UserProgress[]
+  wordHistory UserWordHistory[]
+
+  @@map("articles")
+}
+
+model Author {
+  id        String          @id @default(uuid())
+  name      String
+  avatar    String
+  bio       String?
+  createdAt DateTime        @default(now()) @map("created_at")
+  articles  ArticleAuthor[]
+
+  @@map("authors")
+}
+
+model ArticleAuthor {
+  articleId String  @map("article_id")
+  authorId  String  @map("author_id")
+  article   Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  author    Author  @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@id([articleId, authorId])
+  @@map("article_authors")
+}
+
+model Word {
+  id         String           @id @default(uuid())
+  word       String           @unique
+  createdAt  DateTime         @default(now()) @map("created_at")
+  meanings   WordMeaning[]
+  wordHistory UserWordHistory[]
+
+  @@map("words")
+}
+
+model WordMeaning {
+  id           String       @id @default(uuid())
+  wordId       String       @map("word_id")
+  partOfSpeech String       @map("part_of_speech")
+  createdAt    DateTime     @default(now()) @map("created_at")
+  word         Word         @relation(fields: [wordId], references: [id], onDelete: Cascade)
+  definitions  Definition[]
+  synonyms     Synonym[]
+
+  @@map("word_meanings")
+}
+
+model Definition {
+  id         String      @id @default(uuid())
+  meaningId  String      @map("meaning_id")
+  definition String
+  example    String?
+  createdAt  DateTime    @default(now()) @map("created_at")
+  meaning    WordMeaning @relation(fields: [meaningId], references: [id], onDelete: Cascade)
+
+  @@map("definitions")
+}
+
+model Synonym {
+  meaningId String      @map("meaning_id")
+  synonym   String
+  meaning   WordMeaning @relation(fields: [meaningId], references: [id], onDelete: Cascade)
+
+  @@id([meaningId, synonym])
+  @@map("synonyms")
+}
+
+model UserProgress {
+  userId       String   @map("user_id")
+  articleId    String   @map("article_id")
+  progress     Float    @default(0)
+  lastPosition Int      @default(0) @map("last_position")
+  completed    Boolean  @default(false)
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @default(now()) @map("updated_at")
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  article      Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+
+  @@id([userId, articleId])
+  @@map("user_progress")
+}
+
+model UserWordHistory {
+  id          String    @id @default(uuid())
+  userId      String    @map("user_id")
+  wordId      String    @map("word_id")
+  articleId   String?   @map("article_id")
+  lookupCount Int       @default(1) @map("lookup_count")
+  lastLookup  DateTime  @default(now()) @map("last_lookup")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  word        Word      @relation(fields: [wordId], references: [id], onDelete: Cascade)
+  article     Article?  @relation(fields: [articleId], references: [id], onDelete: SetNull)
+
+  @@unique([userId, wordId])
+  @@map("user_word_history")
+} 
