@@ -9,10 +9,13 @@
         
         <div class="flex items-center space-x-4">
           <nav class="hidden md:flex space-x-6">
-            <NuxtLink to="/" class="hover:text-primary-600 dark:hover:text-primary-400">Home</NuxtLink>
-            <NuxtLink to="/articles" class="hover:text-primary-600 dark:hover:text-primary-400">Articles</NuxtLink>
-            <NuxtLink to="/dictionary" class="hover:text-primary-600 dark:hover:text-primary-400">Dictionary</NuxtLink>
+            <NuxtLink to="/" class="hover:text-primary-600 dark:hover:text-primary-400">{{ $t('home') }}</NuxtLink>
+            <NuxtLink to="/articles" class="hover:text-primary-600 dark:hover:text-primary-400">{{ $t('articles') }}</NuxtLink>
+            <NuxtLink to="/dictionary" class="hover:text-primary-600 dark:hover:text-primary-400">{{ $t('dictionary') }}</NuxtLink>
           </nav>
+          
+          <!-- Language Switcher -->
+          <LanguageSwitcher />
           
           <!-- Color mode toggle -->
           <button @click="toggleColorMode" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
@@ -30,7 +33,7 @@
           </template>
           <template v-else>
             <NuxtLink v-if="!isAuthenticated" to="/login" class="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600">
-              Sign In
+              {{ $t('signIn') }}
             </NuxtLink>
             <div v-else class="relative">
               <button 

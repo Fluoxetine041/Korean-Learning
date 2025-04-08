@@ -1,26 +1,26 @@
 services:
   postgres:
     image: postgres:16
-    container_name: english-learning-db
+    container_name: korean-learning-db
     restart: unless-stopped
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
-      POSTGRES_DB: ${POSTGRES_DB:-english_learning}
+      POSTGRES_USER: ${POSTGRES_USER:-Fluoxetine041}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-Su118156384}
+      POSTGRES_DB: ${POSTGRES_DB:-Korean-db}
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
       - pg_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-Fluoxetine041}"]
       interval: 10s
       timeout: 5s
       retries: 5
 
   adminer:
     image: adminer
-    container_name: english-learning-adminer
+    container_name: korean-learning-adminer
     restart: unless-stopped
     ports:
       - "64549:8080"
@@ -33,16 +33,16 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile
-    container_name: english-learning-nuxt
+    container_name: korean-learning-nuxt
     restart: unless-stopped
     ports:
       - "3000:3000"
     environment:
-      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/english_learning
+      DATABASE_URL: postgresql://${POSTGRES_USER:-Fluoxetine041}:${POSTGRES_PASSWORD:-Su118156384}@postgres:5432/${POSTGRES_DB:-Korean-db}
     depends_on:
       postgres:
         condition: service_healthy
 
 volumes:
   pg_data:
-    name: english_learning_pg_data 
+    name: korean_learning_pg_data 

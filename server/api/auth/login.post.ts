@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
+import { generateAccessToken, generateRefreshToken } from '~/server/services/token.service'
 
 const prisma = new PrismaClient()
 
@@ -65,28 +65,29 @@ export default defineEventHandler(async (event) => {
       data: { lastLogin: new Date() }
     })
 
-    // Create JWT token
-    const jwtSecret = process.env.JWT_SECRET || 'default_secret_change_in_production'
-    console.log('Using JWT secret:', jwtSecret.slice(0, 3) + '...')
+    // 使用我們的 token 服務生成 Access Token
+    const accessToken = generateAccessToken({
+      userId: user.id,
+      email: user.email,
+      username: user.username,
+      role: user.role
+    })
     
-    const token = jwt.sign(
-      { 
-        userId: user.id,
-        email: user.email,
-        username: user.username
-      },
-      jwtSecret,
-      { expiresIn: '7d' }
-    )
+    // 生成 Refresh Token 並存儲
+    const refreshToken = await generateRefreshToken(user.id)
+    
+    console.log('Tokens generated successfully')
 
-    // Return user data and token (excluding password)
+    // Return user data and tokens
     return {
-      token,
+      accessToken,
+      refreshToken: refreshToken.token,
       user: {
         id: user.id,
         email: user.email,
         username: user.username,
-        fullName: user.fullName
+        fullName: user.fullName,
+        role: user.role // 返回角色信息
       }
     }
   } catch (error) {

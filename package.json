@@ -18,6 +18,7 @@
     "@nuxtjs/auth-next": "^5.0.0-1667386184.dfbbb54",
     "@nuxtjs/color-mode": "^3.5.2",
     "@nuxtjs/google-fonts": "^3.2.0",
+    "@nuxtjs/i18n": "^8.5.6",
     "@nuxtjs/tailwindcss": "^6.13.2",
     "@prisma/client": "^6.5.0",
     "@types/bcrypt": "^5.0.2",
@@ -26,14 +27,16 @@
     "@types/uuid": "^10.0.0",
     "bcrypt": "^5.1.1",
     "jsonwebtoken": "^9.0.2",
-    "nuxt": "^3.16.2",
+    "nuxt": "^3.15.4",
     "pg": "^8.11.3",
+    "unhead": "1.8.0",
     "uuid": "^11.1.0",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
     "prisma": "^6.5.0",
-    "tsx": "^4.19.3"
+    "tsx": "^4.19.3",
+    "@types/node": "^20.11.25"
   }
 }

@@ -20,9 +20,11 @@ model User {
   createdAt     DateTime         @default(now()) @map("created_at")
   lastLogin     DateTime?        @map("last_login")
   isActive      Boolean          @default(true) @map("is_active")
+  role          String           @default("user") @map("role")
   preferences   UserPreference?
   progress      UserProgress[]
   wordHistory   UserWordHistory[]
+  refreshTokens RefreshToken[]
 
   @@map("users")
 }
@@ -151,4 +153,24 @@ model UserWordHistory {
 
   @@unique([userId, wordId])
   @@map("user_word_history")
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    String   @map("user_id")
+  expiresAt DateTime @map("expires_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  isRevoked Boolean  @default(false) @map("is_revoked")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("refresh_tokens")
+}
+
+model TokenBlacklist {
+  tokenHash    String   @id
+  expiresAt    DateTime @map("expires_at")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  @@map("token_blacklist")
 } 

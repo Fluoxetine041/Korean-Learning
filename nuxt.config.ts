@@ -7,7 +7,8 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
     '@nuxtjs/color-mode',
-    '@nuxtjs/google-fonts'
+    '@nuxtjs/google-fonts',
+    '@nuxtjs/i18n'
   ],
   
   // Module configurations
@@ -23,6 +24,35 @@ export default defineNuxtConfig({
       'Open+Sans': [300, 400, 600, 700],
     },
     display: 'swap',
+  },
+  
+  i18n: {
+    lazy: true,
+    langDir: 'i18n',
+    strategy: 'prefix_except_default',
+    defaultLocale: 'en',
+    locales: [
+      {
+        code: 'en',
+        name: 'English',
+        file: 'en.json'
+      },
+      {
+        code: 'zh-TW',
+        name: '繁體中文',
+        file: 'zh-TW.json'
+      },
+      {
+        code: 'ko',
+        name: '한국어',
+        file: 'ko.json'
+      }
+    ],
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root'
+    }
   },
   
   // App configuration
