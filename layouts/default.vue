@@ -58,20 +58,20 @@
                   to="/profile" 
                   class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
-                  Profile
+                  {{ $t('profile') }}
                 </NuxtLink>
                 <NuxtLink 
                   to="/settings" 
                   class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
-                  Settings
+                  {{ $t('settings') }}
                 </NuxtLink>
                 <div class="border-t border-gray-200 dark:border-gray-700 my-1"></div>
                 <button 
                   @click="handleLogout" 
                   class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
-                  Logout
+                  {{ $t('logout') }}
                 </button>
               </div>
             </div>
@@ -89,7 +89,7 @@
     <footer class="bg-gray-100 dark:bg-gray-800 py-6">
       <div class="container mx-auto px-4">
         <div class="text-center text-gray-600 dark:text-gray-400">
-          <p>&copy; {{ new Date().getFullYear() }} English Learning Hub. All rights reserved.</p>
+          <p>&copy; {{ new Date().getFullYear() }} English Learning Hub. {{ $t('allRightsReserved') }}</p>
         </div>
       </div>
     </footer>

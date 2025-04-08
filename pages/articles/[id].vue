@@ -114,15 +114,23 @@ watch(pending, (newValue) => {
   isLoading.value = newValue
 })
 
-// Helper function for level badge color
+// Helper to get CSS class for level badge
 function getLevelClass(level: string) {
   switch (level) {
-    case 'beginner':
-      return 'bg-green-500'
-    case 'intermediate':
+    case 'S':
+      return 'bg-red-600'
+    case 'A':
+      return 'bg-orange-500'
+    case 'B':
+      return 'bg-purple-600'
+    case 'C':
       return 'bg-blue-500'
-    case 'advanced':
-      return 'bg-purple-500'
+    case 'D':
+      return 'bg-green-500' 
+    case 'E':
+      return 'bg-gray-500'
+    case 'F':
+      return 'bg-white text-gray-800 border border-gray-300'
     default:
       return 'bg-gray-500'
   }

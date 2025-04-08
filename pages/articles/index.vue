@@ -69,12 +69,20 @@ const filteredArticles = computed(() => {
 // Helper to get appropriate CSS class for level badge
 function getLevelClass(level: string) {
   switch (level) {
-    case 'beginner':
-      return 'bg-green-500'
-    case 'intermediate':
+    case 'S':
+      return 'bg-red-600'
+    case 'A':
+      return 'bg-orange-500'
+    case 'B':
+      return 'bg-purple-600'
+    case 'C':
       return 'bg-blue-500'
-    case 'advanced':
-      return 'bg-purple-500'
+    case 'D':
+      return 'bg-green-500' 
+    case 'E':
+      return 'bg-gray-500'
+    case 'F':
+      return 'bg-white text-gray-800 border border-gray-300'
     default:
       return 'bg-gray-500'
   }
@@ -99,9 +107,13 @@ function getLevelClass(level: string) {
             class="w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 shadow-sm focus:border-primary-500 focus:ring focus:ring-primary-500 focus:ring-opacity-50"
           >
             <option value="">All Levels</option>
-            <option value="beginner">Beginner</option>
-            <option value="intermediate">Intermediate</option>
-            <option value="advanced">Advanced</option>
+            <option value="S">S - 專業級水平</option>
+            <option value="A">A - 高級水平</option>
+            <option value="B">B - 中高級水平</option>
+            <option value="C">C - 中級水平</option>
+            <option value="D">D - 中初級水平</option>
+            <option value="E">E - 初級水平</option>
+            <option value="F">F - 入門級水平</option>
           </select>
         </div>
         

@@ -21,7 +21,22 @@ export default defineI18nConfig(() => ({
       home: 'Home',
       articles: 'Articles',
       dictionary: 'Dictionary',
-      signIn: 'Sign In'
+      signIn: 'Sign In',
+      // Profile page
+      yourProfile: 'Your Profile',
+      profileInformation: 'Profile Information',
+      username: 'Username',
+      email: 'Email',
+      fullName: 'Full Name',
+      lastLogin: 'Last Login',
+      learningStatistics: 'Learning Statistics',
+      statisticsDesc: 'Statistics will appear here as you use the application.',
+      // Dropdown menu
+      profile: 'Profile',
+      settings: 'Settings',
+      logout: 'Logout',
+      // Footer
+      allRightsReserved: 'All rights reserved.'
     },
     'zh-TW': {
       heroTitle: '透過互動學習提升您的英語技能',
@@ -41,7 +56,22 @@ export default defineI18nConfig(() => ({
       home: '首頁',
       articles: '文章',
       dictionary: '字典',
-      signIn: '登入'
+      signIn: '登入',
+      // Profile page
+      yourProfile: '您的個人資料',
+      profileInformation: '個人資料信息',
+      username: '用戶名',
+      email: '電子郵件',
+      fullName: '全名',
+      lastLogin: '上次登入',
+      learningStatistics: '學習統計',
+      statisticsDesc: '使用應用程式時，統計數據將顯示在此處。',
+      // Dropdown menu
+      profile: '個人資料',
+      settings: '設定',
+      logout: '登出',
+      // Footer
+      allRightsReserved: '版權所有。'
     },
     'ko': {
       heroTitle: '인터랙티브 학습으로 영어 실력 향상하기',
@@ -61,7 +91,22 @@ export default defineI18nConfig(() => ({
       home: '홈',
       articles: '기사',
       dictionary: '사전',
-      signIn: '로그인'
+      signIn: '로그인',
+      // Profile page
+      yourProfile: '내 프로필',
+      profileInformation: '프로필 정보',
+      username: '사용자 이름',
+      email: '이메일',
+      fullName: '전체 이름',
+      lastLogin: '마지막 로그인',
+      learningStatistics: '학습 통계',
+      statisticsDesc: '애플리케이션을 사용하면 여기에 통계가 표시됩니다.',
+      // Dropdown menu
+      profile: '프로필',
+      settings: '설정',
+      logout: '로그아웃',
+      // Footer
+      allRightsReserved: '판권 소유.'
     }
   }
 })) 
