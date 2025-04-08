@@ -125,13 +125,16 @@ function getLevelClass(level: string) {
             class="w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 shadow-sm focus:border-primary-500 focus:ring focus:ring-primary-500 focus:ring-opacity-50"
           >
             <option value="">All Categories</option>
-            <option value="news">News</option>
-            <option value="science">Science</option>
-            <option value="culture">Culture</option>
-            <option value="technology">Technology</option>
-            <option value="business">Business</option>
-            <option value="education">Education</option>
-            <option value="health">Health</option>
+            <option value="business-finance">商業財經</option>
+            <option value="entertainment">影視偶像</option>
+            <option value="art-design">藝術設計</option>
+            <option value="literature">文學小說</option>
+            <option value="religion-astrology">宗教命理</option>
+            <option value="news-events">新聞時事</option>
+            <option value="travel-leisure">休閒旅遊</option>
+            <option value="technology">科技新知</option>
+            <option value="food-cuisine">美食精選</option>
+            <option value="sports">體育賽事</option>
           </select>
         </div>
         
